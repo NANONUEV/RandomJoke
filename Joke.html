@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Random Joke Generator</title>
+</head>
+<body>
+  <button id="getJokeButton">Get Joke</button>
+  <div id="jokeContainer"></div>
+  <script>
+function fetchRandomJoke() {
+  const url = 'https://api.chucknorris.io/jokes/random';
+  fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      // Extract the joke from the API response
+      const joke = data.value;
+      displayJoke(joke);
+    })
+    .catch(error => console.error('Error retrieving joke:', error));
+}
+function displayJoke(joke) {
+  const jokeContainer = document.getElementById('jokeContainer');
+  jokeContainer.textContent = joke;
+}
+const getJokeButton = document.getElementById('getJokeButton');
+getJokeButton.addEventListener('click', fetchRandomJoke);
+  </script>
+</body>
+</html>
